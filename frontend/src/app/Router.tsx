@@ -10,6 +10,7 @@ const RegisterPage = lazy(() => import('@/features/auth/pages/RegisterPage'))
 const DashboardPage = lazy(() => import('@/features/scanner/pages/DashboardPage'))
 const ScannerPage = lazy(() => import('@/features/scanner/pages/ScannerPage'))
 const ScanHistoryPage = lazy(() => import('@/features/scanner/pages/ScanHistoryPage'))
+const ScanResultsPage = lazy(() => import('@/features/scanner/pages/ScanResultsPage'))
 const DeviceDetailsPage = lazy(() => import('@/features/devices/pages/DeviceDetailsPage'))
 
 // Loading fallback
@@ -84,6 +85,7 @@ export function Router() {
                     <Route path="/" element={<DashboardPage />} />
                     <Route path="/scan" element={<ScannerPage />} />
                     <Route path="/history" element={<ScanHistoryPage />} />
+                    <Route path="/scans/:scanId/devices" element={<ScanResultsPage />} />
                     <Route path="/devices/:id" element={<DeviceDetailsPage />} />
                 </Route>
 

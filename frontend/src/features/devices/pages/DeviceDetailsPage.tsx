@@ -15,6 +15,7 @@ import clsx from 'clsx'
 
 interface Device {
     id: string
+    scanId: string
     ipAddress: string
     macAddress: string | null
     hostname: string | null
@@ -72,12 +73,16 @@ export default function DeviceDetailsPage() {
         )
     }
 
+    const backTo = deviceData.scanId
+        ? `/scans/${deviceData.scanId}/devices`
+        : '/history'
+
     return (
         <div className="space-y-6">
             {/* Header */}
             <div className="flex items-center gap-4">
                 <Link
-                    to="/history"
+                    to={backTo}
                     className="p-2 rounded-lg text-slate-400 hover:text-slate-100 hover:bg-slate-800 transition-colors"
                 >
                     <ArrowLeft className="w-5 h-5" />

@@ -51,11 +51,20 @@ export class MySQLDeviceRepository implements IDeviceRepository {
         await db(this.tableName).insert(data);
 
         return Device.create({
-            ...device.toJSON(),
             id,
+            scanId: device.scanId,
             ipAddress: device.ipAddress,
             macAddress: device.macAddress,
-        } as Device['props']);
+            hostname: device.hostname,
+            vendor: device.vendor,
+            deviceType: device.deviceType,
+            isOnline: device.isOnline,
+            lastSeen: device.lastSeen,
+            customName: device.customName,
+            notes: device.notes,
+            createdAt: device.createdAt,
+            updatedAt: device.updatedAt,
+        });
     }
 
     async saveMany(devices: Device[]): Promise<Device[]> {
@@ -70,11 +79,20 @@ export class MySQLDeviceRepository implements IDeviceRepository {
 
         return devices.map((device, index) =>
             Device.create({
-                ...device.toJSON(),
-                id: dataRows[index].id,
+                id: dataRows[index].id as string,
+                scanId: device.scanId,
                 ipAddress: device.ipAddress,
                 macAddress: device.macAddress,
-            } as Device['props'])
+                hostname: device.hostname,
+                vendor: device.vendor,
+                deviceType: device.deviceType,
+                isOnline: device.isOnline,
+                lastSeen: device.lastSeen,
+                customName: device.customName,
+                notes: device.notes,
+                createdAt: device.createdAt,
+                updatedAt: device.updatedAt,
+            })
         );
     }
 

@@ -103,50 +103,52 @@ export default function ScanHistoryPage() {
             ) : (
                 <div className="space-y-4">
                     {data?.map((scan) => (
-                        <Card key={scan.id} hover>
-                            <CardContent className="flex items-center gap-4">
-                                {/* Status Icon */}
-                                <div className="flex-shrink-0">
-                                    {getStatusIcon(scan.status)}
-                                </div>
-
-                                {/* Scan Info */}
-                                <div className="flex-1 min-w-0">
-                                    <div className="flex items-center gap-3">
-                                        <span className="font-mono text-white">{scan.networkRange}</span>
-                                        <span className={clsx(
-                                            'px-2 py-0.5 text-xs font-medium rounded-full border capitalize',
-                                            getStatusColor(scan.status)
-                                        )}>
-                                            {scan.status}
-                                        </span>
+                        <Link key={scan.id} to={`/scans/${scan.id}/devices`} className="block">
+                            <Card hover>
+                                <CardContent className="flex items-center gap-4">
+                                    {/* Status Icon */}
+                                    <div className="flex-shrink-0">
+                                        {getStatusIcon(scan.status)}
                                     </div>
-                                    <div className="flex items-center gap-4 mt-1 text-sm text-slate-400">
-                                        <span className="capitalize">{scan.scanType} scan</span>
-                                        <span>•</span>
-                                        <span>{new Date(scan.createdAt).toLocaleString()}</span>
-                                    </div>
-                                </div>
 
-                                {/* Stats */}
-                                <div className="flex items-center gap-6 text-sm">
-                                    <div className="text-center">
-                                        <div className="flex items-center gap-1 text-white">
-                                            <Monitor className="w-4 h-4 text-cyber-400" />
-                                            <span className="font-semibold">{scan.devicesFound}</span>
+                                    {/* Scan Info */}
+                                    <div className="flex-1 min-w-0">
+                                        <div className="flex items-center gap-3">
+                                            <span className="font-mono text-white">{scan.networkRange}</span>
+                                            <span className={clsx(
+                                                'px-2 py-0.5 text-xs font-medium rounded-full border capitalize',
+                                                getStatusColor(scan.status)
+                                            )}>
+                                                {scan.status}
+                                            </span>
                                         </div>
-                                        <span className="text-slate-500 text-xs">devices</span>
+                                        <div className="flex items-center gap-4 mt-1 text-sm text-slate-400">
+                                            <span className="capitalize">{scan.scanType} scan</span>
+                                            <span>•</span>
+                                            <span>{new Date(scan.createdAt).toLocaleString()}</span>
+                                        </div>
                                     </div>
-                                    <div className="text-center">
-                                        <span className="text-white font-semibold">{formatDuration(scan.durationMs)}</span>
-                                        <span className="text-slate-500 text-xs block">duration</span>
-                                    </div>
-                                </div>
 
-                                {/* View Details */}
-                                <ChevronRight className="w-5 h-5 text-slate-500" />
-                            </CardContent>
-                        </Card>
+                                    {/* Stats */}
+                                    <div className="flex items-center gap-6 text-sm">
+                                        <div className="text-center">
+                                            <div className="flex items-center gap-1 text-white">
+                                                <Monitor className="w-4 h-4 text-cyber-400" />
+                                                <span className="font-semibold">{scan.devicesFound}</span>
+                                            </div>
+                                            <span className="text-slate-500 text-xs">devices</span>
+                                        </div>
+                                        <div className="text-center">
+                                            <span className="text-white font-semibold">{formatDuration(scan.durationMs)}</span>
+                                            <span className="text-slate-500 text-xs block">duration</span>
+                                        </div>
+                                    </div>
+
+                                    {/* View Details */}
+                                    <ChevronRight className="w-5 h-5 text-slate-500" />
+                                </CardContent>
+                            </Card>
+                        </Link>
                     ))}
                 </div>
             )}

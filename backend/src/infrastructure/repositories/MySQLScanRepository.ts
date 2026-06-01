@@ -61,9 +61,16 @@ export class MySQLScanRepository implements IScanRepository {
         await db(this.tableName).insert(data);
 
         return NetworkScan.create({
-            ...scan.toJSON(),
             id,
-        } as NetworkScan['props']);
+            userId: scan.userId,
+            networkRange: scan.networkRange,
+            scanType: scan.scanType,
+            status: scan.status,
+            startedAt: scan.startedAt,
+            completedAt: scan.completedAt,
+            devicesFound: scan.devicesFound,
+            createdAt: scan.createdAt,
+        });
     }
 
     async update(scan: NetworkScan): Promise<NetworkScan> {
